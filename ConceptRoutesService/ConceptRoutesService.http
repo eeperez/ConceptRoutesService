@@ -1,0 +1,6 @@
+@ConceptRoutesService_HostAddress = http://localhost:5286
+
+GET {{ConceptRoutesService_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
