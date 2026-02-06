@@ -1,5 +1,7 @@
 using Azure;
 using Azure.Maps.Routing;
+using ConceptRoutesService.Services;
+using NetTopologySuite.Geometries;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +24,8 @@ builder.Services.AddHttpClient("URLExpander", client =>
     // Aquí puedes configurar cosas globales como el User-Agent si fuera necesario
     client.DefaultRequestHeaders.Add("User-Agent", "HttpClient-LinkExpander");
 });
+
+builder.Services.AddScoped<IRouteLimitService>(provider => new RouteLimitService(new GeometryFactory()));
 
 var app = builder.Build();
 

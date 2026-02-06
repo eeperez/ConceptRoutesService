@@ -1,16 +1,11 @@
 ﻿using Azure;
-using Azure.Core;
 using Azure.Core.GeoJson;
 using Azure.Maps.Routing;
 using Azure.Maps.Routing.Models;
-using AzureMapsToolkit.Traffic;
 using ConceptRoutesService.Dtos;
 using ConceptRoutesService.Dtos.ORSDtos;
 using ConceptRoutesService.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Net.Http;
 using System.Text.RegularExpressions;
 
 namespace ConceptRoutesService.Controllers
@@ -21,13 +16,13 @@ namespace ConceptRoutesService.Controllers
     {
         private readonly IHttpClientFactory httpClientFactory;
         private readonly MapsRoutingClient azureClient;
-        private readonly RouteLimitService routeLimitService;
+        private readonly IRouteLimitService routeLimitService;
 
-        public RoutesServicesController(IHttpClientFactory httpClientFactory, MapsRoutingClient azureClient)
+        public RoutesServicesController(IHttpClientFactory httpClientFactory, MapsRoutingClient azureClient, IRouteLimitService routeLimitService)
         {
             this.httpClientFactory = httpClientFactory;
             this.azureClient = azureClient;
-            routeLimitService = new RouteLimitService();
+            this.routeLimitService = routeLimitService;
         }
 
         [HttpGet("dataroute")]

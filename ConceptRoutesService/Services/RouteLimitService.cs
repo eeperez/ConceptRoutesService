@@ -3,15 +3,16 @@ using NetTopologySuite.Geometries;
 
 namespace ConceptRoutesService.Services
 {
-    public class RouteLimitService
+    public class RouteLimitService : IRouteLimitService
     {
         private readonly GeometryFactory geometryFactory;
-        public RouteLimitService()
+
+        public RouteLimitService(GeometryFactory geometryFactory)
         {
-            geometryFactory = new GeometryFactory();
+            this.geometryFactory = geometryFactory;
         }
 
-        public Polygon GetLimitPolygon ()
+        public Polygon GetLimitPolygon()
         {
             Coordinate[] puntosPeriferico = new[] {
                 new Coordinate(-89.65124254997441, 21.043595171377078),
